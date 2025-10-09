@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Munene Macharia & Company Advocates</title>
+
+<!-- Elegant Serif + Sans fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #0e3573;
+  --secondary: #d61b1b;
+  --bg-dark: #0b0d11;
+  --bg-card: #151820;
+  --text-light: #f7f7f7;
+  --text-muted: #b6b6b6;
+  --radius: 14px;
+  --transition: all 0.4s ease;
+  --shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+.balthazar-regular {
+  font-family: "Balthazar", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--primary);
+  padding: 20px 80px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.navbar img {
+  height: 100px;
+}
+.navbar h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  margin: 0;
+}
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 500;
+  position: relative;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: var(--secondary);
+  transition: var(--transition);
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+.chat-btn {
+  background: var(--secondary);
+  border: none;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.chat-btn:hover {
+  transform: scale(1.05);
+  background: #b71212;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(15,17,25,0.8)),
+    url('https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1600&q=80')
+    no-repeat center/cover;
+  padding: 160px 10%;
+  text-align: left;
+}
+.hero p:first-child {
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 700;
+  margin: 20px 0;
+  line-height: 1.2;
+}
+.hero p {
+  width: 60%;
+  line-height: 1.8;
+  font-size: 16px;
+  color: #d2d2d2;
+}
+.hero-buttons {
+  margin-top: 35px;
+  display: flex;
+  gap: 20px;
+}
+.btn-dark, .btn-outline {
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-dark {
+  background: var(--primary);
+  border: none;
+  color: #fff;
+}
+.btn-outline {
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+}
+.btn-dark:hover, .btn-outline:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+/* Practice Areas */
+.practice-section {
+  padding: 100px 8%;
+  text-align: center;
+}
+.practice-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  margin-bottom: 15px;
+}
+.practice-section p {
+  color: var(--text-muted);
+  margin-bottom: 60px;
+  font-size: 16px;
+}
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+.practice-card {
+  background: var(--bg-card);
+  padding: 40px 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border-top: 3px solid transparent;
+}
+.practice-card:hover {
+  transform: translateY(-8px);
+  border-top: 3px solid var(--secondary);
+  background: #1b1f28;
+}
+.practice-card h3 {
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 12px;
+}
+.practice-card p {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Why Choose */
+.why-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px 10%;
+  background: var(--bg-dark);
+  gap: 60px;
+}
+.why-text {
+  width: 55%;
+}
+.why-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  margin-bottom: 35px;
+}
+.why-card {
+  background: var(--bg-card);
+  padding: 25px 30px;
+  margin-bottom: 25px;
+  border-radius: var(--radius);
+  border-left: 5px solid var(--secondary);
+  transition: var(--transition);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+.why-card:hover {
+  transform: translateX(5px);
+  background: #1c2028;
+}
+.why-card h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.why-card p {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.why-image {
+  flex: 1;
+  border-radius: var(--radius);
+  background: url('https://images.unsplash.com/photo-1581094651124-1e7a8d6caa2c?auto=format&fit=crop&w=900&q=60')
+    center/cover no-repeat;
+  height: 420px;
+  box-shadow: var(--shadow);
+}
+
+/* Testimonials */
+.testimonial {
+  background: #101218;
+  text-align: center;
+  padding: 100px 10%;
+}
+.testimonial h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+.testimonial p {
+  color: #ccc;
+  font-size: 17px;
+  font-style: italic;
+  max-width: 700px;
+  margin: 0 auto 15px;
+  line-height: 1.7;
+}
+.testimonial span {
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+/* Footer */
+footer {
+  background: var(--primary);
+  text-align: center;
+  padding: 30px;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .navbar {
+    flex-direction: column;
+    padding: 15px 30px;
+  }
+  .hero {
+    padding: 120px 8%;
+    text-align: left;
+  }
+  .hero p {width: 100%;}
+  .why-section {
+    flex-direction: column-reverse;
+    padding: 80px 8%;
+  }
+  .why-text, .why-image {
+    width: 100%;
+  }
+  .why-image {
+    height: 300px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+
+
+
+  <div style="display:flex;align-items:center;gap:10px;">
+    <img src="C:\Users\chris\Downloads\mmlogo.png" alt="Law Logo">
+    <h3>Munene Macharia & CO.<br>Advocates</h3>
+  </div>
+
+
+
+
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#practice">Practice</a>
+    <a href="#">Contact</a>
+  </div>
+  <button class="chat-btn" onclick="window.open('https://wa.me/254712345678','_blank')">Let's Chat</button>
+</div>
+
+<!-- Hero -->
+
+
+<section class="hero">
+  <p>Professional and Experienced</p>
+  <h1>Providing Excellence in<br>Legal Services</h1>
+  <p>Welcome to Munene Macharia & Company Advocates — a full-service law firm helping individuals, businesses, and organizations navigate complex legal landscapes with confidence. Our skilled attorneys provide tailored solutions upholding integrity, diligence, and professionalism.</p>
+
+
+
+  <div class="hero-buttons">
+    <button class="btn-dark">About Us</button>
+    <button class="btn-outline">Practice Areas</button>
+  </div>
+</section>
+
+<!-- Practice Areas -->
+<section class="practice-section" id="practice">
+  <h2>Our Practice Areas</h2>
+  <p>Strategic, comprehensive, and client-focused legal expertise for every situation.</p>
+  <div class="practice-grid">
+    <div class="practice-card">
+      <h3>Conveyancing & Real Estate</h3>
+      <p>Efficient management of property sales, leases, and transfers ensuring legal clarity and client peace of mind.</p>
+    </div>
+    <div class="practice-card">
+      <h3>Corporate & Commercial Law</h3>
+      <p>Comprehensive business guidance on compliance, structuring, and transactions.</p>
+    </div>
+    <div class="practice-card">
+      <h3>Family Law & Succession</h3>
+      <p>Empathetic support for family matters including custody, inheritance, and estate planning.</p>
+    </div>
+    <div class="practice-card">
+      <h3>Litigation — Civil & Criminal</h3>
+      <p>Strong courtroom advocacy, strategic defense, and resolution across all judicial levels.</p>
+    </div>
+    <div class="practice-card">
+      <h3>Employment & Labour Law</h3>
+      <p>Ensuring fairness and compliance for both employers and employees.</p>
+    </div>
+    <div class="practice-card">
+      <h3>Intellectual Property</h3>
+      <p>Protecting creative, digital, and industrial assets through robust IP law strategies.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose -->
+<section class="why-section">
+  <div class="why-image"></div>
+  <div class="why-text">
+    <h2>Why Choose Munene Macharia & Company Advocates?</h2>
+    <div class="why-card">
+      <h4>Trusted Legal Expertise</h4>
+      <p>Years of proven success across diverse fields — blending experience, insight, and results.</p>
+    </div>
+    <div class="why-card">
+      <h4>Client-Centered Philosophy</h4>
+      <p>Every client receives personalized attention, clear communication, and genuine commitment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonial">
+  <h2>What Our Clients Say</h2>
+  <p>"Munene Macharia & Company Advocates handled our restructuring seamlessly. Their professionalism and precision were unmatched."</p>
+  <span>— Jane Mwangi, CEO of AlphaTech Ltd.</span>
+</section>
+
+<!-- Footer -->
+<footer>
+  © 2025 Munene Macharia & Company Advocates. All Rights Reserved.
+</footer>
+
+</body>
+</html>
