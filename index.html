@@ -7,6 +7,12 @@
 
 <!-- Elegant Serif + Sans fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- AOS + GSAP -->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
 :root {
@@ -20,6 +26,7 @@
   --transition: all 0.4s ease;
   --shadow: 0 8px 30px rgba(0,0,0,0.25);
 }
+
 body {
   margin: 0;
   background: var(--bg-dark);
@@ -67,7 +74,9 @@ body {
   background: var(--secondary);
   transition: var(--transition);
 }
-.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover::after {
+  width: 100%;
+}
 .chat-btn {
   background: var(--secondary);
   border: none;
@@ -85,11 +94,25 @@ body {
 
 /* Hero */
 .hero {
+  position: relative;
   background: linear-gradient(rgba(0,0,0,0.7), rgba(15,17,25,0.8)),
     url('https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1600&q=80')
     no-repeat center/cover;
   padding: 160px 10%;
   text-align: left;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 70%);
+  pointer-events: none;
+  animation: glow 8s infinite alternate;
+}
+@keyframes glow {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.4; }
 }
 .hero p:first-child {
   text-transform: uppercase;
@@ -103,17 +126,23 @@ body {
   font-weight: 700;
   margin: 20px 0;
   line-height: 1.2;
+  position: relative;
+  z-index: 2;
 }
 .hero p {
   width: 60%;
   line-height: 1.8;
   font-size: 16px;
   color: #d2d2d2;
+  position: relative;
+  z-index: 2;
 }
 .hero-buttons {
   margin-top: 35px;
   display: flex;
   gap: 20px;
+  position: relative;
+  z-index: 2;
 }
 .btn-dark, .btn-outline {
   padding: 14px 32px;
@@ -166,19 +195,9 @@ body {
   border-top: 3px solid transparent;
 }
 .practice-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-12px);
   border-top: 3px solid var(--secondary);
   background: #1b1f28;
-}
-.practice-card h3 {
-  font-size: 20px;
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 12px;
-}
-.practice-card p {
-  color: var(--text-muted);
-  font-size: 15px;
-  line-height: 1.7;
 }
 
 /* Why Choose */
@@ -208,12 +227,6 @@ body {
 .why-card:hover {
   transform: translateX(5px);
   background: #1c2028;
-}
-.why-card h4 { font-size: 18px; margin-bottom: 10px; }
-.why-card p {
-  color: var(--text-muted);
-  font-size: 15px;
-  line-height: 1.6;
 }
 .why-image {
   flex: 1;
@@ -248,7 +261,7 @@ body {
   color: var(--text-light);
 }
 
-/* Meet the Team */
+/* Team Section */
 .team-section {
   padding: 100px 8%;
   text-align: center;
@@ -276,11 +289,10 @@ body {
   box-shadow: var(--shadow);
   transition: var(--transition);
   backdrop-filter: blur(6px);
-  position: relative;
   overflow: hidden;
 }
 .team-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-12px);
   background: rgba(28, 32, 44, 0.9);
 }
 .team-img {
@@ -302,12 +314,6 @@ body {
   margin-bottom: 15px;
   font-weight: 600;
 }
-.team-card p {
-  color: var(--text-muted);
-  font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
 .team-socials {
   display: flex;
   justify-content: center;
@@ -322,9 +328,7 @@ body {
   color: var(--secondary);
   transform: scale(1.2);
 }
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
-/* Footer */
 footer {
   background: var(--primary);
   text-align: center;
@@ -338,10 +342,7 @@ footer {
   .navbar { flex-direction: column; padding: 15px 30px; }
   .hero { padding: 120px 8%; text-align: left; }
   .hero p { width: 100%; }
-  .why-section {
-    flex-direction: column-reverse;
-    padding: 80px 8%;
-  }
+  .why-section { flex-direction: column-reverse; padding: 80px 8%; }
   .why-text, .why-image { width: 100%; }
   .why-image { height: 300px; }
 }
@@ -355,12 +356,10 @@ footer {
     <img src="mmlogo.png" alt="Law Logo">
     <h3>Munene Macharia & CO.<br>Advocates</h3>
   </div>
-
   <div class="nav-links">
     <a href="#">Home</a>
     <a href="#">About</a>
     <a href="#practice">Practice</a>
-    <a href="#team">Team</a>
     <a href="#">Contact</a>
   </div>
   <button class="chat-btn" onclick="window.open('https://wa.me/254712345678','_blank')">Let's Chat</button>
@@ -378,31 +377,27 @@ footer {
 </section>
 
 <!-- Practice Areas -->
-<section class="practice-section" id="practice">
+<section class="practice-section" id="practice" data-aos="fade-up">
   <h2>Our Practice Areas</h2>
   <p>Strategic, comprehensive, and client-focused legal expertise for every situation.</p>
   <div class="practice-grid">
-    <div class="practice-card">
+    <div class="practice-card" data-aos="fade-up" data-aos-delay="100">
       <h3>Conveyancing & Real Estate</h3>
       <p>Efficient management of property sales, leases, and transfers ensuring legal clarity and client peace of mind.</p>
     </div>
-    <div class="practice-card">
+    <div class="practice-card" data-aos="fade-up" data-aos-delay="200">
       <h3>Corporate & Commercial Law</h3>
       <p>Comprehensive business guidance on compliance, structuring, and transactions.</p>
     </div>
-    <div class="practice-card">
-      <h3>Constitutional and Human Rights Law</h3>
-      <p>Advocating for the protection of fundamental freedoms, civil liberties, and equal treatment under the law.</p>
-    </div>
-    <div class="practice-card">
+    <div class="practice-card" data-aos="fade-up" data-aos-delay="300">
       <h3>Litigation — Civil & Criminal</h3>
       <p>Strong courtroom advocacy, strategic defense, and resolution across all judicial levels.</p>
     </div>
-    <div class="practice-card">
+    <div class="practice-card" data-aos="fade-up" data-aos-delay="400">
       <h3>Employment & Labour Law</h3>
       <p>Ensuring fairness and compliance for both employers and employees.</p>
     </div>
-    <div class="practice-card">
+    <div class="practice-card" data-aos="fade-up" data-aos-delay="500">
       <h3>Intellectual Property</h3>
       <p>Protecting creative, digital, and industrial assets through robust IP law strategies.</p>
     </div>
@@ -411,8 +406,8 @@ footer {
 
 <!-- Why Choose -->
 <section class="why-section">
-  <div class="why-image"></div>
-  <div class="why-text">
+  <div class="why-image" data-aos="fade-right"></div>
+  <div class="why-text" data-aos="fade-left">
     <h2>Why Choose Munene Macharia & Company Advocates?</h2>
     <div class="why-card">
       <h4>Trusted Legal Expertise</h4>
@@ -426,30 +421,28 @@ footer {
 </section>
 
 <!-- Testimonials -->
-<section class="testimonial">
+<section class="testimonial" data-aos="fade-up">
   <h2>What Our Clients Say</h2>
   <p>"Munene Macharia & Company Advocates handled our restructuring seamlessly. Their professionalism and precision were unmatched."</p>
   <span>— Jane Mwangi, CEO of AlphaTech Ltd.</span>
 </section>
 
-<!-- Meet the Team -->
-<section class="team-section" id="team">
+<!-- Team -->
+<section class="team-section" id="team" data-aos="fade-up">
   <h2>Meet Our Team</h2>
   <p>Dedicated professionals committed to excellence, ethics, and your success.</p>
-  
   <div class="team-grid">
-    <div class="team-card">
-      <div class="team-img" style="background-image: url('StanleyPfp.jpeg');"></div>
+    <div class="team-card" data-aos="zoom-in">
+      <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1603415526960-f8f0a2087a1d?auto=format&fit=crop&w=800&q=80');"></div>
       <h3>Stanley Munene Macharia</h3>
-      <h5>CEO & Lead Advocate</h5>
+      <h5>Managing Partner</h5>
       <p>Lead counsel with extensive experience in corporate, property, and constitutional law.</p>
       <div class="team-socials">
         <a href="#"><i class="fab fa-linkedin"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
       </div>
     </div>
-
-    <div class="team-card">
+    <div class="team-card" data-aos="zoom-in" data-aos-delay="200">
       <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1557862921-37829c790f19?auto=format&fit=crop&w=800&q=80');"></div>
       <h3>Faith Wanjiru</h3>
       <h5>Associate Advocate</h5>
@@ -459,8 +452,7 @@ footer {
         <a href="#"><i class="fab fa-twitter"></i></a>
       </div>
     </div>
-
-    <div class="team-card">
+    <div class="team-card" data-aos="zoom-in" data-aos-delay="400">
       <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1590080875839-1b1c99b15b8d?auto=format&fit=crop&w=800&q=80');"></div>
       <h3>James Kariuki</h3>
       <h5>Legal Researcher</h5>
@@ -473,30 +465,28 @@ footer {
   </div>
 </section>
 
-<!-- Footer -->
 <footer>
   © 2025 Munene Macharia & Company Advocates. All Rights Reserved.
 </footer>
 
+<!-- Animation Init -->
 <script>
-const cards = document.querySelectorAll('.team-card');
-window.addEventListener('scroll', () => {
-  cards.forEach(card => {
-    const rect = card.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      card.style.opacity = 1;
-      card.style.transform = 'translateY(0)';
-    }
+  AOS.init({ duration: 1000, once: true, offset: 120 });
+
+  // GSAP hero motion
+  gsap.from(".hero h1", {
+    y: 60, opacity: 0, duration: 1.2, ease: "power3.out", delay: 0.3
   });
-});
-cards.forEach(card => {
-  card.style.opacity = 0;
-  card.style.transform = 'translateY(40px)';
-  card.style.transition = 'all 0.6s ease-out';
-});
+  gsap.from(".hero p", {
+    y: 40, opacity: 0, duration: 1, ease: "power2.out", delay: 0.6, stagger: 0.2
+  });
+  gsap.from(".hero-buttons", {
+    y: 50, opacity: 0, duration: 1.1, ease: "power2.out", delay: 1
+  });
 </script>
+
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/a2b5f6e4c3.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
-
-
