@@ -1,210 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Munene Macharia Advocates</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background-color: #fdfcf9;
-      color: #2b2b2b;
-    }
-    h1, h2, h3 {
-      font-family: 'Cormorant Garamond', serif;
-      letter-spacing: 0.5px;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Munene Macharia & Co. — Advocates</title>
 
-    /* Navbar */
-    .nav-links {
-      transition: all 0.4s ease;
-    }
-    .mobile-menu {
-      display: none;
-    }
-    @media (max-width: 980px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: #fffaf5;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        z-index: 50;
-      }
-      .nav-links.open {
-        display: flex;
-      }
-      .mobile-menu {
-        display: block;
-        cursor: pointer;
-      }
-    }
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-    /* Practice Areas */
-    .practice-area {
-      background: linear-gradient(to bottom right, #fefcf8, #faf6ef);
-      border: 1px solid #e5dcc3;
-      border-radius: 14px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    }
-    .practice-area:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 14px rgba(0,0,0,0.08);
-      border-color: #d1b370;
-    }
+<!-- AOS + GSAP -->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-    /* Testimonials */
-    .testimonial {
-      background: #fffefb;
-      border: 1px solid #efe8da;
-      border-radius: 14px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.04);
-    }
+<!-- FontAwesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 
-    /* Team */
-    .team-member {
-      background: #fffefb;
-      border-radius: 14px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-      border: 1px solid #f0e8d9;
-      transition: transform 0.3s ease;
-    }
-    .team-member:hover {
-      transform: translateY(-5px);
-    }
-  </style>
+<style>
+  /* =========================
+     Design tokens
+     ========================= */
+  :root{
+    --navy: #0f1724;         /* deep navy */
+    --brass: #bfa15a;        /* accent brass/gold */
+    --charcoal: #0b0f15;     /* dark */
+    --parchment: #fbf7f0;    /* light paper */
+    --muted: #7b7b7b;
+    --text-dark: #111217;
+    --radius: 14px;
+    --shadow-lg: 0 12px 40px rgba(5,8,12,0.6);
+    --shadow-sm: 0 6px 20px rgba(5,8,12,0.35);
+    --transition: 300ms cubic-bezier(.2,.9,.2,1);
+  }
+
+  /* =========================
+     Base
+     ========================= */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color:var(--text-dark);
+    background: linear-gradient(180deg, var(--charcoal) 0%, #07090b 100%);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.6;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* =========================
+     Layout - Container
+     ========================= */
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* =========================
+     Navbar
+     ========================= */
+  .navbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 0;background:linear-gradient(180deg, rgba(15,20,30,0.95), rgba(15,20,30,0.9));
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+  }
+  .brand{
+    display:flex;gap:14px;align-items:center;
+  }
+  .brand img{height:64px;width:auto;border-radius:8px;object-fit:cover}
+  .brand h1{margin:0;font-family:'Cormorant Garamond', serif;font-size:20px;color:var(--parchment);line-height:1}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{color:rgba(255,255,255,0.92);font-weight:500;font-size:15px;position:relative;padding:6px 0}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-8px;width:0;height:3px;background:var(--brass);transition:var(--transition)}
+  .nav-links a:hover::after{width:100%}
+  .cta-wa{background:var(--brass);color:var(--navy);padding:9px 16px;border-radius:10px;font-weight:600;border:none;cursor:pointer;transition:var(--transition)}
+  .cta-wa:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(191,161,90,0.12)}
+
+  /* =========================
+     Hero (big & regal)
+     ========================= */
+  .hero{
+    position:relative;overflow:hidden;padding:96px 0 84px;
+    background:
+      radial-gradient(circle at 10% 10%, rgba(191,161,90,0.02), transparent 18%),
+      linear-gradient(180deg, rgba(5,7,10,0.6), rgba(5,7,10,0.75)),
+      url('https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1600&q=80') center/cover fixed;
+    color:var(--parchment);
+  }
+  .hero .container{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center}
+  .hero-intro{max-width:760px}
+  .kicker{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:14px}
+  .hero h2{
+    margin:0;font-family:'Cormorant Garamond',serif;font-size:48px;line-height:1.02;font-weight:600;margin-bottom:18px;color:var(--parchment);
+    letter-spacing:0.2px;
+  }
+  .intro-p{color:rgba(255,255,255,0.9);font-size:17px;max-width:62ch}
+  /* dropcap */
+  .intro-p.dropcap::first-letter{
+    float:left;font-family:'Cormorant Garamond',serif;font-size:3.2rem;color:var(--brass);margin-right:12px;line-height:0.8;font-weight:700;
+  }
+  .hero-cta{margin-top:28px;display:flex;gap:14px;align-items:center}
+  .btn-ghost{background:transparent;color:var(--parchment);border:1px solid rgba(255,255,255,0.12);padding:10px 18px;border-radius:10px;font-weight:600}
+  .btn-primary{background:var(--brass);color:var(--navy);padding:10px 18px;border-radius:10px;font-weight:700;border:none}
+  /* seal watermark */
+  .seal{
+    position:absolute;right:8%;top:20%;opacity:0.06;transform:rotate(-12deg);width:320px;height:320px;pointer-events:none;
+  }
+
+  /* =========================
+     Sections rhythm: parchment vs dark
+     ========================= */
+  section {padding:84px 0}
+  .paper{background:var(--parchment);color:var(--text-dark}
+  .paper .container{padding-left:8px;padding-right:8px}
+  .dark{background:var(--charcoal);color:var(--parchment)}
+
+  /* =========================
+     Practice Grid (paper)
+     ========================= */
+  .practice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+  .practice-card{
+    background:transparent;border:1px solid rgba(16,16,16,0.04);padding:26px;border-radius:12px;box-shadow:var(--shadow-sm);
+  }
+  .practice-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;margin:0 0 8px}
+  .practice-card p{margin:0;color:var(--muted);font-size:15px}
+
+  /* =========================
+     Why choose (dark left image)
+     ========================= */
+  .why-wrap{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+  .why-image{
+    height:360px;border-radius:14px;background:
+      linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.45)),
+      url('https://images.unsplash.com/photo-1581094651124-1e7a8d6caa2c?auto=format&fit=crop&w=900&q=60') center/cover;
+    box-shadow:var(--shadow-lg);
+  }
+  .why-list .card{background:rgba(255,255,255,0.03);padding:18px;border-radius:12px;margin-bottom:18px;border-left:4px solid rgba(191,161,90,0.06)}
+  .why-list h4{margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:18px}
+  .why-list p{margin:0;color:rgba(255,255,255,0.8)}
+
+  /* =========================
+     Testimonials (paper)
+     ========================= */
+  .testimonial {text-align:center}
+  .testimonial p{font-style:italic;color:var(--text-dark);max-width:900px;margin:0 auto 12px;font-size:18px}
+  .testimonial span{display:block;margin-top:8px;font-weight:600;color:var(--muted)}
+
+  /* =========================
+     Team (paper)
+     ========================= */
+  .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px}
+  .team-card{
+    background:#fff;border-radius:12px;padding:22px;box-shadow:var(--shadow-sm);border-left:6px solid rgba(191,161,90,0.18);
+    display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform var(--transition),box-shadow var(--transition);
+  }
+  .team-card:hover{transform:translateY(-10px);box-shadow:0 22px 50px rgba(8,10,12,0.35)}
+  .team-img{width:110px;height:110px;border-radius:999px;background-size:cover;background-position:center;border:3px solid var(--brass);margin-bottom:14px}
+  .team-card h3{margin:6px 0 4px;font-family:'Cormorant Garamond',serif}
+  .team-card h5{margin:0;color:var(--muted);font-weight:600;font-size:14px}
+  .team-card p{color:var(--muted);font-size:14px;margin-top:12px}
+  .team-socials{display:flex;gap:12px;margin-top:14px}
+  .team-socials a{color:var(--navy);background:var(--brass);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+
+  /* =========================
+     Footer
+     ========================= */
+  footer{padding:28px 0;background:#07111b;color:rgba(255,255,255,0.85);text-align:center;font-size:14px}
+
+  /* =========================
+     Responsive
+     ========================= */
+  @media (max-width:1000px){
+    .hero .container{grid-template-columns:1fr}
+    .hero{padding:64px 0}
+    .why-wrap{grid-template-columns:1fr}
+    .nav-links{display:none}
+  }
+  @media (max-width:520px){
+    .brand img{height:50px}
+    .hero h2{font-size:34px}
+    .intro-p{font-size:15px}
+    .container{padding:0 18px}
+  }
+</style>
 </head>
+<body>
 
-<body class="antialiased">
+  <!-- NAV -->
+  <header class="navbar">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:18px">
+      <div class="brand">
+        <img src="mmlogo.png" alt="Munene Macharia logo" onerror="this.style.display='none'">
+        <div>
+          <h1>Munene Macharia & Co.</h1>
+          <div style="font-size:12px;color:rgba(255,255,255,0.65)">Advocates & Legal Counsel</div>
+        </div>
+      </div>
 
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md fixed w-full z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-gray-800">Munene Macharia Advocates</h1>
-      <div class="hidden md:flex space-x-8 nav-links">
-        <a href="#home" class="hover:text-yellow-700">Home</a>
-        <a href="#practice" class="hover:text-yellow-700">Practice Areas</a>
-        <a href="#testimonials" class="hover:text-yellow-700">Testimonials</a>
-        <a href="#team" class="hover:text-yellow-700">Team</a>
-        <a href="#contact" class="hover:text-yellow-700">Contact</a>
-      </div>
-      <div class="mobile-menu md:hidden" id="menu-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
-        </svg>
-      </div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#practice">Practice</a>
+        <a href="#why">Why Us</a>
+        <a href="#team">Team</a>
+        <a class="cta-wa" href="https://wa.me/254712345678" target="_blank" rel="noopener">Let's Chat</a>
+      </nav>
     </div>
-    <div class="nav-links md:hidden" id="mobile-menu">
-      <a href="#home" class="block px-6 py-3 hover:bg-yellow-50">Home</a>
-      <a href="#practice" class="block px-6 py-3 hover:bg-yellow-50">Practice Areas</a>
-      <a href="#testimonials" class="block px-6 py-3 hover:bg-yellow-50">Testimonials</a>
-      <a href="#team" class="block px-6 py-3 hover:bg-yellow-50">Team</a>
-      <a href="#contact" class="block px-6 py-3 hover:bg-yellow-50">Contact</a>
-    </div>
-  </nav>
+  </header>
 
-  <!-- Hero Section -->
-  <section id="home" class="pt-32 pb-20 bg-gradient-to-br from-[#fefbf7] to-[#f8f4ed]">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gray-900">Justice. Integrity. Advocacy.</h1>
-      <p class="text-lg md:text-xl text-gray-700 mb-10">Committed to excellence in every legal matter we handle. Munene Macharia Advocates stands firm in delivering justice, guidance, and strategic solutions with compassion and precision.</p>
-      <div class="hero-buttons flex justify-center gap-6">
-        <a href="#contact" class="bg-yellow-600 text-white px-6 py-3 rounded-full shadow hover:bg-yellow-700 transition">Contact Us</a>
-        <a href="#practice" class="border border-yellow-700 text-yellow-700 px-6 py-3 rounded-full hover:bg-yellow-50 transition">Our Services</a>
+  <!-- HERO -->
+  <section id="home" class="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="hero-intro" data-aos="fade-right">
+        <div class="kicker">Professional & Trusted</div>
+        <h2 id="hero-title">Providing Excellence in Legal Services — Thoughtful, Strategic, Resolute</h2>
+        <p class="intro-p dropcap">We represent individuals and organisations with integrity and meticulous attention to detail. From complex corporate matters to constitutional litigation, our team delivers clarity, guidance, and outcomes tailored to your objectives.</p>
+
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="document.querySelector('#team').scrollIntoView({behavior:'smooth'})">Meet Our Team</button>
+          <button class="btn-ghost" onclick="document.querySelector('#practice').scrollIntoView({behavior:'smooth'})">Practice Areas</button>
+        </div>
       </div>
+
+      <aside aria-hidden="true" style="display:flex;align-items:center;justify-content:center">
+        <!-- small contact card on the right -->
+        <div style="background:rgba(255,255,255,0.04);padding:28px;border-radius:12px;box-shadow:var(--shadow-sm);width:100%;max-width:360px;">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:56px;height:56px;border-radius:10px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--parchment);">MM</div>
+            <div>
+              <div style="font-weight:700;color:var(--parchment)">Book a Consultation</div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.75)">Quick, confidential advice</div>
+            </div>
+          </div>
+          <div style="margin-top:18px">
+            <a class="btn-primary" style="display:inline-block;width:100%;text-align:center" href="https://wa.me/254712345678" target="_blank">Message Us</a>
+          </div>
+        </div>
+      </aside>
     </div>
+
+    <!-- seal watermark -->
+    <svg class="seal" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="none" stroke="black" stroke-width="2">
+        <circle cx="100" cy="100" r="62"/>
+        <path d="M60 120h80" stroke-width="2.2"/>
+        <text x="100" y="104" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="18" fill="black">Munene Macharia</text>
+      </g>
+    </svg>
   </section>
 
-  <!-- Practice Areas -->
-  <section id="practice" class="py-20 bg-[#fffefc]">
-    <div class="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
-      <h2 class="text-4xl font-bold mb-8 text-gray-900">Practice Areas</h2>
-      <p class="text-gray-700 mb-12">We provide strategic legal counsel across diverse areas of practice, ensuring every client receives tailored and effective representation.</p>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="practice-area p-8" data-aos="fade-up">
-          <h3 class="text-2xl font-semibold mb-4 text-yellow-800">Corporate Law</h3>
-          <p>We assist businesses in navigating corporate governance, contracts, mergers, and compliance issues with precision and foresight.</p>
-        </div>
-        <div class="practice-area p-8" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-2xl font-semibold mb-4 text-yellow-800">Litigation</h3>
-          <p>Our experienced litigators advocate for clients in complex disputes, ensuring justice and favorable outcomes through robust representation.</p>
-        </div>
-        <div class="practice-area p-8" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-2xl font-semibold mb-4 text-yellow-800">Real Estate & Property Law</h3>
-          <p>We guide clients through property transactions, conveyancing, and real estate disputes with efficiency and diligence.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- PRACTICE (paper) -->
+  <section id="practice" class="paper" data-aos="fade-up">
+    <div class="container">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;margin-bottom:6px;text-align:center">Our Practice Areas</h2>
+      <div style="max-width:760px;margin:0 auto 28px;text-align:center;color:var(--muted)">Strategic, comprehensive, and client-focused legal expertise for every situation.</div>
 
-  <!-- Testimonials -->
-  <section id="testimonials" class="py-20 bg-[#fefcf9]">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold mb-10 text-gray-900">Testimonials</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="testimonial p-6" data-aos="fade-up">
-          <p class="italic text-gray-700">"Professional, compassionate, and effective. They turned a difficult situation into a success story."</p>
-          <h4 class="mt-4 font-semibold text-yellow-800">– Client A</h4>
+      <div class="practice-grid">
+        <div class="practice-card" data-aos="fade-up" data-aos-delay="80">
+          <h3>Conveyancing & Real Estate</h3>
+          <p>Property sales, leases and transfers managed efficiently with legal clarity at every step.</p>
         </div>
-        <div class="testimonial p-6" data-aos="fade-up" data-aos-delay="100">
-          <p class="italic text-gray-700">"Their expertise in corporate law gave us confidence and clarity throughout our business transition."</p>
-          <h4 class="mt-4 font-semibold text-yellow-800">– Client B</h4>
-        </div>
-        <div class="testimonial p-6" data-aos="fade-up" data-aos-delay="200">
-          <p class="italic text-gray-700">"Exceptional legal support with personal attention to every detail."</p>
-          <h4 class="mt-4 font-semibold text-yellow-800">– Client C</h4>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Team -->
-  <section id="team" class="py-20 bg-[#fffefb]">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold mb-12 text-gray-900">Our Team</h2>
-      <div class="grid md:grid-cols-3 gap-10">
-        <div class="team-member p-6" data-aos="fade-up">
-          <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e" class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" alt="Team Member">
-          <h3 class="text-2xl font-semibold text-yellow-800">John Doe</h3>
-          <p class="text-gray-700">Senior Partner</p>
+        <div class="practice-card" data-aos="fade-up" data-aos-delay="160">
+          <h3>Corporate & Commercial Law</h3>
+          <p>Guidance on business formation, compliance, commercial contracts and transactions.</p>
         </div>
-        <div class="team-member p-6" data-aos="fade-up" data-aos-delay="100">
-          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" alt="Team Member">
-          <h3 class="text-2xl font-semibold text-yellow-800">Jane Smith</h3>
-          <p class="text-gray-700">Associate Advocate</p>
+
+        <div class="practice-card" data-aos="fade-up" data-aos-delay="240">
+          <h3>Litigation — Civil & Criminal</h3>
+          <p>Strategic courtroom advocacy and dispute resolution across all judicial levels.</p>
         </div>
-        <div class="team-member p-6" data-aos="fade-up" data-aos-delay="200">
-          <img src="https://images.unsplash.com/photo-1603415526960-f7e0328f9d1d" class="w-32 h-32 mx-auto rounded-full mb-4 object-cover" alt="Team Member">
-          <h3 class="text-2xl font-semibold text-yellow-800">James Brown</h3>
-          <p class="text-gray-700">Legal Consultant</p>
+
+        <div class="practice-card" data-aos="fade-up" data-aos-delay="320">
+          <h3>Employment & Labour Law</h3>
+          <p>Employment disputes, contracts and compliance counsel for employers and employees.</p>
+        </div>
+
+        <div class="practice-card" data-aos="fade-up" data-aos-delay="400">
+          <h3>Intellectual Property</h3>
+          <p>Protection of creative, digital and industrial assets through robust IP strategy.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GSAP + AOS + Mobile Menu -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- WHY (dark) -->
+  <section id="why" class="dark" data-aos="fade-up">
+    <div class="container">
+      <div class="why-wrap">
+        <div class="why-image" data-aos="fade-right"></div>
+        <div class="why-list" data-aos="fade-left">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;margin-bottom:6px">Why Choose Us</h2>
+          <div class="card" style="margin-bottom:18px">
+            <h4>Trusted Legal Expertise</h4>
+            <p>Years of proven success across diverse fields — blending experience, insight and results.</p>
+          </div>
+
+          <div class="card" style="margin-bottom:18px">
+            <h4>Client-Centered Philosophy</h4>
+            <p>Personalized attention, clear communication, and genuine commitment to each client's goals.</p>
+          </div>
+
+          <div class="card">
+            <h4>Practical, Strategic Advice</h4>
+            <p>We combine legal rigor with commercial sense — helping you make decisions that move you forward.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS (paper) -->
+  <section class="paper" data-aos="fade-up">
+    <div class="container testimonial">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;margin-bottom:8px">What Our Clients Say</h2>
+      <p>"Munene Macharia & Company handled our restructuring seamlessly. Their professionalism and precision were unmatched."</p>
+      <span>— Jane Mwangi, CEO, AlphaTech Ltd.</span>
+    </div>
+  </section>
+
+  <!-- TEAM (paper) -->
+  <section id="team" class="paper" data-aos="fade-up">
+    <div class="container">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;margin-bottom:6px;text-align:center">Meet Our Team</h2>
+      <div style="max-width:760px;margin:0 auto 22px;text-align:center;color:var(--muted)">Dedicated professionals committed to excellence, ethics and your success.</div>
+
+      <div class="team-grid">
+        <article class="team-card" data-aos="zoom-in">
+          <div class="team-img" style="background-image:url('https://images.unsplash.com/photo-1603415526960-f8f0a2087a1d?auto=format&fit=crop&w=800&q=80')"></div>
+          <h3>Stanley Munene Macharia</h3>
+          <h5>Managing Partner</h5>
+          <p>Lead counsel with extensive experience in corporate, property and constitutional law.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </article>
+
+        <article class="team-card" data-aos="zoom-in" data-aos-delay="120">
+          <div class="team-img" style="background-image:url('https://images.unsplash.com/photo-1557862921-37829c790f19?auto=format&fit=crop&w=800&q=80')"></div>
+          <h3>Faith Wanjiru</h3>
+          <h5>Associate Advocate</h5>
+          <p>Specializes in litigation, employment and human rights law — passionate about justice.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </article>
+
+        <article class="team-card" data-aos="zoom-in" data-aos-delay="220">
+          <div class="team-img" style="background-image:url('https://images.unsplash.com/photo-1590080875839-1b1c99b15b8d?auto=format&fit=crop&w=800&q=80')"></div>
+          <h3>James Kariuki</h3>
+          <h5>Legal Researcher</h5>
+          <p>Supports complex case preparation and ensures every brief is backed by thorough research.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Munene Macharia & Company Advocates · All Rights Reserved · Nairobi, Kenya
+    </div>
+  </footer>
+
+  <!-- Scripts: AOS init + GSAP hero -->
   <script>
-    AOS.init({ duration: 1000, once: true });
-    gsap.from("h1", { y: 30, opacity: 0, duration: 1 });
-    gsap.from(".hero-buttons", { y: 50, opacity: 0, duration: 1.2, delay: 0.5 });
+    // set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 120
+    });
+
+    // GSAP hero entrance
+    gsap.from(".hero h2", { y: 40, opacity: 0, duration: 1.1, ease: "power3.out", delay: 0.2 });
+    gsap.from(".intro-p",  { y: 30, opacity: 0, duration: 1.0, ease: "power2.out", delay: 0.45 });
+    gsap.from(".hero-cta button", { y: 20, opacity: 0, duration: 0.9, stagger: 0.12, delay: 0.7 });
+
+    // small accessibility: keyboard focus outlines
+    document.body.addEventListener('keyup', (e) => {
+      if (e.key === 'Tab') document.documentElement.style.scrollBehavior = 'smooth';
     });
   </script>
-
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/a2b5f6e4c3.js" crossorigin="anonymous"></script>
-
 </body>
 </html>
