@@ -263,6 +263,89 @@ body {
   color: var(--text-light);
 }
 
+  /* Meet the Team */
+.team-section {
+  padding: 100px 8%;
+  text-align: center;
+  background: var(--bg-dark);
+}
+.team-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  margin-bottom: 15px;
+}
+.team-section p {
+  color: var(--text-muted);
+  margin-bottom: 60px;
+  font-size: 16px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.team-card {
+  background: rgba(21, 24, 32, 0.8);
+  border-radius: var(--radius);
+  padding: 40px 25px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  backdrop-filter: blur(6px);
+  position: relative;
+  overflow: hidden;
+}
+.team-card:hover {
+  transform: translateY(-10px);
+  background: rgba(28, 32, 44, 0.9);
+}
+.team-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 25px;
+  background-size: cover;
+  background-position: center;
+  border: 3px solid var(--secondary);
+  box-shadow: 0 0 20px rgba(214, 27, 27, 0.3);
+}
+.team-card h3 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 5px;
+}
+.team-card h5 {
+  color: var(--secondary);
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+.team-card p {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Social icons */
+.team-socials {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.team-socials a {
+  color: var(--text-light);
+  font-size: 18px;
+  transition: var(--transition);
+}
+.team-socials a:hover {
+  color: var(--secondary);
+  transform: scale(1.2);
+}
+
+/* FontAwesome for icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+
 /* Footer */
 footer {
   background: var(--primary);
@@ -438,9 +521,27 @@ footer {
 <footer>
   © 2025 Munene Macharia & Company Advocates. All Rights Reserved.
 </footer>
+<script>
+const cards = document.querySelectorAll('.team-card');
+window.addEventListener('scroll', () => {
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      card.style.opacity = 1;
+      card.style.transform = 'translateY(0)';
+    }
+  });
+});
+cards.forEach(card => {
+  card.style.opacity = 0;
+  card.style.transform = 'translateY(40px)';
+  card.style.transition = 'all 0.6s ease-out';
+});
+</script>
 
 </body>
 </html>
+
 
 
 
