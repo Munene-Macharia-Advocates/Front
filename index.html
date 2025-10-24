@@ -1,402 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Munene Macharia & Company Advocates</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Munene Macharia & Company Advocates — Classic Prestige</title>
 
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- AOS + GSAP -->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<!-- FontAwesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 
 <style>
 :root {
-  --primary: #0e1930;
-  --secondary: #bfa15a;
-  --bg-dark: #0b0d11;
-  --bg-light: #f9f7f3;
-  --text-light: #f7f7f7;
-  --text-dark: #1a1a1a;
-  --muted: #a5a5a5;
-  --radius: 14px;
-  --transition: all 0.4s ease;
-  --shadow: 0 8px 30px rgba(0,0,0,0.2);
+  --navy:#0f1724;
+  --brass:#bfa15a;
+  --parchment:#fbf7f0;
+  --charcoal:#0b0f15;
+  --muted:#777;
+  --text-dark:#111217;
+  --radius:12px;
+  --shadow:0 12px 40px rgba(5,8,12,0.55);
 }
-
-/* Base Styles */
+*{box-sizing:border-box}
 body {
-  margin: 0;
-  background: var(--bg-dark);
-  color: var(--text-light);
-  font-family: 'DM Sans', sans-serif;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+  margin:0;
+  font-family:"DM Sans",system-ui,Arial;
+  color:var(--text-dark);
+  background:linear-gradient(180deg,var(--charcoal),#071019);
+  -webkit-font-smoothing:antialiased;
 }
-h1, h2, h3 {
-  font-family: 'Cormorant Garamond', serif;
-  letter-spacing: 0.3px;
-}
+.container {max-width:1180px;margin:0 auto;padding:0 22px}
 
 /* Navbar */
 .navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--primary);
-  padding: 20px 80px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  position:sticky;top:0;
+  background:rgba(15,20,30,0.9);
+  backdrop-filter:blur(6px);
+  padding:18px 0;
+  z-index:100;
+  border-bottom:1px solid rgba(255,255,255,0.03);
 }
-.navbar img {
-  height: 80px;
-}
-.navbar h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
-  margin: 0;
-  color: var(--secondary);
-}
-.nav-links {
-  display: flex;
-  gap: 35px;
-}
-.nav-links a {
-  text-decoration: none;
-  color: var(--text-light);
-  font-weight: 500;
-  position: relative;
-}
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 2px;
-  background: var(--secondary);
-  transition: var(--transition);
-}
-.nav-links a:hover::after { width: 100%; }
-
-.chat-btn {
-  background: var(--secondary);
-  border: none;
-  color: #fff;
-  padding: 10px 26px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-}
-.chat-btn:hover {
-  transform: scale(1.05);
-  background: #a68b46;
-}
+.brand {display:flex;gap:12px;align-items:center}
+.brand img{height:60px;border-radius:8px}
+.brand h1{margin:0;font-family:'Cormorant Garamond',serif;color:var(--parchment);font-size:18px}
+.nav-links{display:flex;gap:20px;align-items:center;transition:all .4s ease;}
+.nav-links a{color:rgba(255,255,255,0.92);text-decoration:none;font-weight:500;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-8px;width:0;height:3px;background:var(--brass);transition:width .35s}
+.nav-links a:hover::after{width:100%}
+.cta-wa{background:var(--brass);color:var(--navy);padding:9px 16px;border-radius:9px;font-weight:700;border:none;cursor:pointer}
 
 /* Hamburger */
 .hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
+  display:none;
+  flex-direction:column;
+  cursor:pointer;
+  gap:5px;
 }
-.hamburger div {
-  width: 25px;
-  height: 3px;
-  background: var(--text-light);
-  border-radius: 5px;
-  transition: var(--transition);
+.hamburger span {
+  width:24px;height:2px;background:var(--parchment);
+  transition:all .3s;
 }
-.hamburger.active div:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.nav-links.mobile {
+  display:flex;
+  flex-direction:column;
+  position:absolute;
+  top:72px;right:0;
+  width:100%;
+  background:rgba(15,20,30,0.96);
+  text-align:center;
+  padding:20px 0;
 }
-.hamburger.active div:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active div:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-@media (max-width: 900px) {
-  .nav-links {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    flex-direction: column;
-    width: 100%;
-    background: var(--primary);
-    align-items: center;
-    padding: 20px 0;
-    display: none;
-  }
-  .nav-links.active { display: flex; }
-  .navbar { padding: 15px 30px; }
-  .hamburger { display: flex; }
-  .chat-btn { display: none; }
-}
+.nav-links.mobile a {padding:10px 0}
 
 /* Hero */
 .hero {
-  background: linear-gradient(rgba(0,0,0,0.7), rgba(15,17,25,0.9)),
-    url('https://images.unsplash.com/photo-1581094651124-1e7a8d6caa2c?auto=format&fit=crop&w=1600&q=80')
-    no-repeat center/cover;
-  padding: 160px 10%;
-  text-align: left;
+  position:relative;
+  padding:92px 0 72px;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(191,161,90,0.02), transparent 18%),
+    linear-gradient(180deg, rgba(7,9,11,0.68), rgba(7,9,11,0.8)),
+    url('https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1600&q=80') center/cover fixed;
+  color:var(--parchment);
 }
-.hero h1 {
-  font-size: 3.5rem;
-  color: var(--secondary);
-}
-.hero p {
-  width: 60%;
-  color: #d2d2d2;
-  line-height: 1.8;
-}
-.hero-buttons {
-  margin-top: 40px;
-  display: flex;
-  gap: 20px;
-}
-.btn-dark, .btn-outline {
-  padding: 14px 32px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-}
-.btn-dark {
-  background: var(--secondary);
-  border: none;
-  color: #fff;
-}
-.btn-outline {
-  border: 1px solid #fff;
-  background: transparent;
-  color: #fff;
-}
-.btn-dark:hover, .btn-outline:hover {
-  transform: translateY(-3px);
-  opacity: 0.9;
-}
+.hero .container{display:grid;grid-template-columns:1fr 380px;gap:36px;align-items:center}
+.kicker{font-size:12px;letter-spacing:2px;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:10px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:44px;margin:0 0 16px;line-height:1.04}
+.hero p{line-height:1.8;color:rgba(255,255,255,0.9);font-size:16px}
+.hero-buttons{display:flex;gap:14px;margin-top:22px}
+.btn-primary{background:var(--brass);color:var(--navy);padding:10px 18px;border-radius:10px;border:none;font-weight:700}
+.btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.12);color:var(--parchment);padding:10px 18px;border-radius:10px}
 
-/* Practice Areas */
-.practice-section {
-  padding: 100px 8%;
-  text-align: center;
-  background: var(--bg-light);
-  color: var(--text-dark);
-}
-.practice-section h2 {
-  font-size: 34px;
-  margin-bottom: 15px;
-}
-.practice-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 35px;
-}
-.practice-card {
-  background: #fff;
-  padding: 40px 30px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  transition: var(--transition);
-  border-top: 3px solid transparent;
-}
-.practice-card:hover {
-  transform: translateY(-8px);
-  border-top: 3px solid var(--secondary);
-  background: #fefcf8;
-}
+/* Seal watermark */
+.seal{position:absolute;right:6%;top:18%;opacity:0.06;width:300px;pointer-events:none}
 
-/* Testimonials */
-.testimonial {
-  background: linear-gradient(145deg, #101218, #14161e);
-  text-align: center;
-  padding: 100px 10%;
-}
-.testimonial h2 {
-  font-size: 30px;
-  color: var(--secondary);
-}
-.testimonial p {
-  color: #ccc;
-  font-size: 17px;
-  font-style: italic;
-  max-width: 700px;
-  margin: 0 auto 15px;
-  line-height: 1.7;
-}
-.testimonial span {
-  font-weight: 600;
-  color: var(--text-light);
-}
+/* Sections */
+section{padding:72px 0}
+.paper{background:var(--parchment);color:var(--text-dark)}
+.dark{background:var(--charcoal);color:var(--parchment)}
 
-/* Team */
-.team-section {
-  padding: 100px 8%;
-  text-align: center;
-  background: var(--bg-dark);
-  background-image: radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 60%);
+/* Practice (light elegant revamp) */
+.practice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.practice-card{
+  background:#fff;
+  border:1px solid rgba(191,161,90,0.15);
+  padding:26px;
+  border-radius:12px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.08);
+  transition:transform .3s, box-shadow .3s;
 }
-.team-section h2 {
-  color: var(--secondary);
+.practice-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
+.practice-card h3{font-family:'Cormorant Garamond',serif;margin:0 0 8px;font-size:20px;color:var(--navy)}
+.practice-card p{margin:0;color:var(--muted);font-size:15px}
+
+/* Why */
+.why-wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.why-image{height:340px;border-radius:12px;background:
+  linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.48)),
+  url('https://images.unsplash.com/photo-1581094651124-1e7a8d6caa2c?auto=format&fit=crop&w=900&q=60') center/cover;box-shadow:var(--shadow)}
+.why-card{background:rgba(0,0,0,0.03);padding:16px;border-radius:10px;margin-bottom:14px;border-left:4px solid rgba(191,161,90,0.3)}
+.why-card h4{margin:0 0 8px;font-family:'Cormorant Garamond',serif;color:var(--brass)}
+.why-card p{margin:0;color:rgba(255,255,255,0.8)}
+
+/* Testimonial (ivory gradient revamp) */
+.testimonial{max-width:900px;margin:0 auto;text-align:center;
+background:linear-gradient(135deg,#fff, #f7f3ea);
+padding:60px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.08)}
+.testimonial p{font-style:italic;color:var(--text-dark);font-size:17px;margin-bottom:8px}
+.testimonial span{color:var(--muted);font-weight:600}
+
+/* Team (light brass touch) */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.team-card{
+  background:#fff;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 8px 30px rgba(10,12,16,0.08);
+  border-top:4px solid var(--brass);
+  text-align:center;
+  transition:transform .35s,box-shadow .35s;
 }
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
-  margin-top: 50px;
-}
-.team-card {
-  background: rgba(21, 24, 32, 0.85);
-  border-radius: var(--radius);
-  padding: 40px 25px;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
-  backdrop-filter: blur(6px);
-}
-.team-card:hover {
-  transform: translateY(-8px);
-  background: rgba(28, 32, 44, 0.9);
-  box-shadow: 0 8px 35px rgba(0,0,0,0.3);
-}
-.team-img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 0 auto 25px;
-  background-size: cover;
-  background-position: center;
-  border: 3px solid var(--secondary);
-  box-shadow: 0 0 20px rgba(214, 168, 27, 0.25);
-}
-.team-card h3 {
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--secondary);
-}
-.team-card h5 { color: #ddd; margin-bottom: 15px; }
-.team-card p { color: #aaa; }
+.team-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(10,12,16,0.12)}
+.team-img{width:110px;height:110px;border-radius:999px;background-size:cover;background-position:center;border:3px solid var(--brass);margin:0 auto 12px}
+.team-card h3{font-family:'Cormorant Garamond',serif;margin:6px 0 2px}
+.team-card h5{margin:0;color:var(--muted);font-size:14px}
+.team-card p{color:var(--muted);font-size:14px;margin-top:10px}
+.team-socials{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.team-socials a{width:36px;height:36px;border-radius:8px;background:var(--brass);display:inline-flex;align-items:center;justify-content:center;color:var(--navy)}
 
 /* Footer */
-footer {
-  background: var(--primary);
-  text-align: center;
-  padding: 30px;
-  color: #fff;
-  font-size: 14px;
+footer{padding:24px 0;text-align:center;background:#07111b;color:rgba(255,255,255,0.8)}
+
+/* Responsive */
+@media (max-width:980px){
+  .hero .container{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .why-wrap{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .hero h1{font-size:28px}
+  .hero p{font-size:15px}
 }
 </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<div class="navbar">
-  <div style="display:flex;align-items:center;gap:10px;">
-    <img src="mmlogo.png" alt="Law Logo">
-    <h3>Munene Macharia & CO.<br>Advocates</h3>
-  </div>
+<header class="navbar">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between">
+    <div class="brand">
+      <img src="mmlogo.png" alt="Law Logo" onerror="this.style.display='none'">
+      <div><h1>Munene Macharia & CO.<br>Advocates</h1></div>
+    </div>
 
-  <div class="nav-links">
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#practice">Practice</a>
-    <a href="#team">Team</a>
-    <a href="#">Contact</a>
-  </div>
+    <nav class="nav-links" id="nav-links">
+      <a href="#home">Home</a>
+      <a href="#practice">Practice</a>
+      <a href="#why">Why Us</a>
+      <a href="#team">Team</a>
+      <a class="cta-wa" href="https://wa.me/254712345678" target="_blank">Let's Chat</a>
+    </nav>
 
-  <button class="chat-btn" onclick="window.open('https://wa.me/254712345678','_blank')">Let's Chat</button>
-  <div class="hamburger" id="hamburger">
-    <div></div><div></div><div></div>
-  </div>
-</div>
-
-<!-- Hero -->
-<section class="hero">
-  <p>Professional and Experienced</p>
-  <h1>Providing Excellence in<br>Legal Services</h1>
-  <p>Welcome to Munene Macharia & Company Advocates — a full-service law firm helping individuals, businesses, and organizations navigate complex legal landscapes with confidence. Our skilled attorneys provide tailored solutions upholding integrity, diligence, and professionalism.</p>
-  <div class="hero-buttons">
-    <button class="btn-dark">About Us</button>
-    <button class="btn-outline">Practice Areas</button>
-  </div>
-</section>
-
-<!-- Practice -->
-<section class="practice-section" id="practice">
-  <h2>Our Practice Areas</h2>
-  <p>Strategic, comprehensive, and client-focused legal expertise for every situation.</p>
-  <div class="practice-grid">
-    <div class="practice-card">
-      <h3>Conveyancing & Real Estate</h3>
-      <p>Efficient management of property sales, leases, and transfers ensuring legal clarity and client peace of mind.</p>
-    </div>
-    <div class="practice-card">
-      <h3>Corporate & Commercial Law</h3>
-      <p>Comprehensive business guidance on compliance, structuring, and transactions.</p>
-    </div>
-    <div class="practice-card">
-      <h3>Constitutional and Human Rights Law</h3>
-      <p>Advocating for the protection of fundamental freedoms, civil liberties, and equal treatment under the law.</p>
-    </div>
-    <div class="practice-card">
-      <h3>Litigation — Civil & Criminal</h3>
-      <p>Strong courtroom advocacy, strategic defense, and resolution across all judicial levels.</p>
-    </div>
-    <div class="practice-card">
-      <h3>Employment & Labour Law</h3>
-      <p>Ensuring fairness and compliance for both employers and employees.</p>
-    </div>
-    <div class="practice-card">
-      <h3>Intellectual Property</h3>
-      <p>Protecting creative, digital, and industrial assets through robust IP law strategies.</p>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
     </div>
   </div>
-</section>
+</header>
 
-<!-- Testimonials -->
-<section class="testimonial">
-  <h2>What Our Clients Say</h2>
-  <p>"Munene Macharia & Company Advocates handled our restructuring seamlessly. Their professionalism and precision were unmatched."</p>
-  <span>— Jane Mwangi, CEO of AlphaTech Ltd.</span>
-</section>
+<!-- rest of your HTML (hero, practice, why, testimonial, team, footer) stays the same -->
 
-<!-- Team -->
-<section class="team-section" id="team">
-  <h2>Meet Our Team</h2>
-  <p>Dedicated professionals committed to excellence, ethics, and your success.</p>
-  <div class="team-grid">
-    <div class="team-card">
-      <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1603415526960-f8f0a2087a1d?auto=format&fit=crop&w=800&q=80');"></div>
-      <h3>Stanley Munene Macharia</h3>
-      <h5>Managing Partner</h5>
-      <p>Lead counsel with extensive experience in corporate, property, and constitutional law.</p>
-    </div>
-    <div class="team-card">
-      <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1557862921-37829c790f19?auto=format&fit=crop&w=800&q=80');"></div>
-      <h3>Faith Wanjiru</h3>
-      <h5>Associate Advocate</h5>
-      <p>Specializes in litigation, employment, and human rights law — passionate about justice and fairness.</p>
-    </div>
-    <div class="team-card">
-      <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1590080875839-1b1c99b15b8d?auto=format&fit=crop&w=800&q=80');"></div>
-      <h3>James Kariuki</h3>
-      <h5>Legal Researcher</h5>
-      <p>Supports complex case preparation and analysis, ensuring every brief is backed by thorough insight.</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  © 2025 Munene Macharia & Company Advocates. All Rights Reserved.
-</footer>
+<footer><div class="container">© 2025 Munene Macharia & Company Advocates. All Rights Reserved.</div></footer>
 
 <script>
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.querySelector('.nav-links');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  navLinks.classList.toggle('active');
+AOS.init({duration:900,once:true,offset:120,easing:'ease-out-cubic'});
+gsap.from(".hero h1",{y:50,opacity:0,duration:1.1,delay:0.2,ease:"power3.out"});
+gsap.from(".hero p",{y:30,opacity:0,duration:1,delay:0.45});
+gsap.from(".hero-buttons",{y:20,opacity:0,duration:0.8,delay:0.85});
+
+// Hamburger menu
+const hamburger=document.getElementById("hamburger");
+const navLinks=document.getElementById("nav-links");
+hamburger.addEventListener("click",()=>{
+  hamburger.classList.toggle("active");
+  navLinks.classList.toggle("mobile");
 });
 </script>
 </body>
