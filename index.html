@@ -6,7 +6,8 @@
 <title>Munene Macharia & Company Advocates</title>
 
 <!-- Elegant Serif + Sans fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Balthazar&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
 <style>
 :root {
@@ -20,12 +21,8 @@
   --transition: all 0.4s ease;
   --shadow: 0 8px 30px rgba(0,0,0,0.25);
 }
-.balthazar-regular {
-  font-family: "Balthazar", serif;
-  font-weight: 400;
-  font-style: normal;
-}
 
+/* General */
 body {
   margin: 0;
   background: var(--bg-dark);
@@ -239,31 +236,7 @@ body {
   box-shadow: var(--shadow);
 }
 
-/* Testimonials */
-.testimonial {
-  background: #101218;
-  text-align: center;
-  padding: 100px 10%;
-}
-.testimonial h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px;
-  margin-bottom: 25px;
-}
-.testimonial p {
-  color: #ccc;
-  font-size: 17px;
-  font-style: italic;
-  max-width: 700px;
-  margin: 0 auto 15px;
-  line-height: 1.7;
-}
-.testimonial span {
-  font-weight: 600;
-  color: var(--text-light);
-}
-
-  /* Meet the Team */
+/* Meet the Team */
 .team-section {
   padding: 100px 8%;
   text-align: center;
@@ -279,270 +252,15 @@ body {
   margin-bottom: 60px;
   font-size: 16px;
 }
-
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 40px;
 }
-
 .team-card {
   background: rgba(21, 24, 32, 0.8);
   border-radius: var(--radius);
   padding: 40px 25px;
   box-shadow: var(--shadow);
   transition: var(--transition);
-  backdrop-filter: blur(6px);
-  position: relative;
-  overflow: hidden;
-}
-.team-card:hover {
-  transform: translateY(-10px);
-  background: rgba(28, 32, 44, 0.9);
-}
-.team-img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 0 auto 25px;
-  background-size: cover;
-  background-position: center;
-  border: 3px solid var(--secondary);
-  box-shadow: 0 0 20px rgba(214, 27, 27, 0.3);
-}
-.team-card h3 {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 5px;
-}
-.team-card h5 {
-  color: var(--secondary);
-  margin-bottom: 15px;
-  font-weight: 600;
-}
-.team-card p {
-  color: var(--text-muted);
-  font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-/* Social icons */
-.team-socials {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-.team-socials a {
-  color: var(--text-light);
-  font-size: 18px;
-  transition: var(--transition);
-}
-.team-socials a:hover {
-  color: var(--secondary);
-  transform: scale(1.2);
-}
-
-/* FontAwesome for icons */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
-
-
-/* Footer */
-footer {
-  background: var(--primary);
-  text-align: center;
-  padding: 30px;
-  color: #fff;
-  font-size: 14px;
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-  .navbar {
-    flex-direction: column;
-    padding: 15px 30px;
-  }
-  .hero {
-    padding: 120px 8%;
-    text-align: left;
-  }
-  .hero p {width: 100%;}
-  .why-section {
-    flex-direction: column-reverse;
-    padding: 80px 8%;
-  }
-  .why-text, .why-image {
-    width: 100%;
-  }
-  .why-image {
-    height: 300px;
-  }
-}
-</style>
-</head>
-<body>
-
-<!-- Navbar -->
-<div class="navbar">
-
-
-
-  <div style="display:flex;align-items:center;gap:10px;">
-    <img src="mmlogo.png" alt="Law Logo">
-    <h3>Munene Macharia & CO.<br>Advocates</h3>
-  </div>
-
-
-
-
-  <div class="nav-links">
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#practice">Practice</a>
-    <a href="#">Contact</a>
-  </div>
-  <button class="chat-btn" onclick="window.open('https://wa.me/254712345678','_blank')">Let's Chat</button>
-</div>
-
-<!-- Hero -->
-
-
-<section class="hero">
-  <p>Professional and Experienced</p>
-  <h1>Providing Excellence in<br>Legal Services</h1>
-  <p>Welcome to Munene Macharia & Company Advocates — a full-service law firm helping individuals, businesses, and organizations navigate complex legal landscapes with confidence. Our skilled attorneys provide tailored solutions upholding integrity, diligence, and professionalism.</p>
-
-<!-- Meet the Team -->
-<section class="team-section" id="team">
-  <h2>Meet Our Team</h2>
-  <p>Dedicated professionals committed to excellence, ethics, and your success.</p>
-  
-  <div class="team-grid">
-    <div class="team-card">
-      <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1603415526960-f8f0a2087a1d?auto=format&fit=crop&w=800&q=80');"></div>
-      <h3>Stanley Munene Macharia</h3>
-      <h5>Managing Partner</h5>
-      <p>Lead counsel with extensive experience in corporate, property, and constitutional law.</p>
-      <div class="team-socials">
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
-    </div>
-
-    <div class="team-card">
-      <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1557862921-37829c790f19?auto=format&fit=crop&w=800&q=80');"></div>
-      <h3>Faith Wanjiru</h3>
-      <h5>Associate Advocate</h5>
-      <p>Specializes in litigation, employment, and human rights law — passionate about justice and fairness.</p>
-      <div class="team-socials">
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
-    </div>
-
-    <div class="team-card">
-      <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1590080875839-1b1c99b15b8d?auto=format&fit=crop&w=800&q=80');"></div>
-      <h3>James Kariuki</h3>
-      <h5>Legal Researcher</h5>
-      <p>Supports complex case preparation and analysis, ensuring every brief is backed by thorough insight.</p>
-      <div class="team-socials">
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <div class="hero-buttons">
-    <button class="btn-dark">About Us</button>
-    <button class="btn-outline">Practice Areas</button>
-  </div>
-</section>
-
-<!-- Practice Areas -->
-<section class="practice-section" id="practice">
-  <h2>Our Practice Areas</h2>
-  <p>Strategic, comprehensive, and client-focused legal expertise for every situation.</p>
-  <div class="practice-grid">
-    <div class="practice-card">
-      <h3>Conveyancing & Real Estate</h3>
-      <p>Efficient management of property sales, leases, and transfers ensuring legal clarity and client peace of mind.</p>
-    </div>
-    <div class="practice-card">
-      <h3>Corporate & Commercial Law</h3>
-      <p>Comprehensive business guidance on compliance, structuring, and transactions.</p>
-    </div>
-    <div class="practice-card">
-      <h3>Constitutional and Human Rights Law</h3>
-      <p><div class="practice-card">
-  <h3>Constitutional and Human Rights Law</h3>
-  <p>Advocating for the protection of fundamental freedoms, civil liberties, and equal treatment under the law.</p>
-    </div>
-    <div class="practice-card">
-      <h3>Litigation — Civil & Criminal</h3>
-      <p>Strong courtroom advocacy, strategic defense, and resolution across all judicial levels.</p>
-    </div>
-    <div class="practice-card">
-      <h3>Employment & Labour Law</h3>
-      <p>Ensuring fairness and compliance for both employers and employees.</p>
-    </div>
-    <div class="practice-card">
-      <h3>Intellectual Property</h3>
-      <p>Protecting creative, digital, and industrial assets through robust IP law strategies.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Why Choose -->
-<section class="why-section">
-  <div class="why-image"></div>
-  <div class="why-text">
-    <h2>Why Choose Munene Macharia & Company Advocates?</h2>
-    <div class="why-card">
-      <h4>Trusted Legal Expertise</h4>
-      <p>Years of proven success across diverse fields — blending experience, insight, and results.</p>
-    </div>
-    <div class="why-card">
-      <h4>Client-Centered Philosophy</h4>
-      <p>Every client receives personalized attention, clear communication, and genuine commitment.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- Testimonials -->
-<section class="testimonial">
-  <h2>What Our Clients Say</h2>
-  <p>"Munene Macharia & Company Advocates handled our restructuring seamlessly. Their professionalism and precision were unmatched."</p>
-  <span>— Jane Mwangi, CEO of AlphaTech Ltd.</span>
-</section>
-
-<!-- Footer -->
-<footer>
-  © 2025 Munene Macharia & Company Advocates. All Rights Reserved.
-</footer>
-<script>
-const cards = document.querySelectorAll('.team-card');
-window.addEventListener('scroll', () => {
-  cards.forEach(card => {
-    const rect = card.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      card.style.opacity = 1;
-      card.style.transform = 'translateY(0)';
-    }
-  });
-});
-cards.forEach(card => {
-  card.style.opacity = 0;
-  card.style.transform = 'translateY(40px)';
-  card.style.transition = 'all 0.6s ease-out';
-});
-</script>
-
-</body>
-</html>
-
-
-
-
-
+  backdrop-
